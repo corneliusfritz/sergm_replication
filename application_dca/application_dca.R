@@ -1,13 +1,3 @@
-# devtools::install_github("statnet/ergm.multi-private",
-#                          ref = "mutex",upgrade = T,
-#                          auth_token = "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")
-# devtools::install_github("statnet/tergm",upgrade = T)
-library(ergm.multi)
-library(tergm)
-options(ergm.loglik.warn_dyads=FALSE)
-library(Matrix)
-library(data.table)
-library(snow)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 rm(list=ls())
 source(file = "helper_functions.R")
