@@ -12,14 +12,11 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 rm(list=ls())
 source(file = "helper_functions.R")
 
-library(coda)
 library(data.table)
 library(ggmcmc)
 library(ergm.sign)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 rm(list=ls())
-# library(ergm.sign)
-# Rcpp::sourceCpp("functions_sample.cpp")
 dca_data = fread("DCAD-v1.0-dyadic.csv")
 library(peacesciencer)
 download_extdata()
@@ -32,11 +29,6 @@ source(file = "../other_functions.R")
 dca_data = fread("DCAD-v1.0-dyadic.csv")
 library(peacesciencer)
 download_extdata()
-
-# 1925
-# 1915
-# 1870
-# debugonce(create_dataset_dca)
 # cinc = fread("Data/NMC-60-wsupplementary.txt")
 tmp_years = 1999:2010
 # debugonce(create_dataset_dca)
@@ -45,24 +37,6 @@ tmp_data = create_dataset_dca(years = tmp_years,
                               aggregate_years =5,mid_var = "any_mid",
                               alliance_var = "any_cow",dca_data = dca_data)
 
-# aggre_data = aggre_function(years = tmp_years[-1],
-#                             aggre_years = 3,data = tmp_data)
-aggre_data = tmp_data
-# for(t in tmp_years[-1] - 2000){
-#   pos_edges = data.frame(which(tmp_network[[t]] == 1, arr.ind = T))
-#   pos_edges$val = 1
-#   pos_edges$weight = 1
-#   neg_edges = data.frame(which(tmp_network[[t]] == -1, arr.ind = T))
-#   neg_edges$val = -1
-#   neg_edges$weight = 2
-#   data_networks = rbind(pos_edges, neg_edges)
-#   names(data_networks) = c("Source", "Target", "Value", "Weight")
-#   tmp_name = paste0("edge_table/year_",t+2000, ".csv")
-#   fwrite(data_networks,file = tmp_name)
-# }
-
-
-# plot(tmp_data$target_matrix)
 
 tmp_network = aggre_data$target_matrix
 alpha = matrix(log(2),nrow = 1,ncol = 1)
@@ -79,93 +53,7 @@ gdppc = aggre_data$cov_gdppc
 cinc = aggre_data$cov_cinc
 common_friends = aggre_data$common_friends
 common_enemies = aggre_data$common_enemies
-net = list()
-number_years = 10
-# the first network will be repeated, but this is only due to the fact that repetition is incorporated as an exo. cov
-for(i in c(1:11)){
-  posnw = tmp_network[[i]] == 1
-  posnw = network(posnw,directed = F)
-  negnw = tmp_network[[i]] == - 1
-  negnw = network(negnw,directed = F)
-  # cat(table(as.matrix(posnw) + as.matrix(negnw)>2),"\n")
-  net_tmp= ergm.multi::Layer(pos=posnw, neg=negnw)
-  net_tmp %ergmlhs% "constraints" <- update(net_tmp %ergmlhs% "constraints", ~ . + fixL(~pos&neg))
-  net[[i]] = net_tmp
-}
-dynamnet = tergm::NetSeries(net)
-# repetition_pos_cov = as.matrix(bdiag(repetition_pos[c(rep(1:10,each = 2))]))
-# repetition_neg_cov = as.matrix(bdiag(repetition_neg[c(rep(1:10,each = 2))]))
-contiguity_cov = as.matrix(bdiag(contiguity[c(rep(1:10,each = 2))]))
-polity_cov = as.matrix(bdiag(polity[c(rep(1:10,each = 2))]))
-gdp_cov = as.matrix(bdiag(gdp[c(rep(1:10,each = 2))]))
-distance_cov = as.matrix(bdiag(distance[c(rep(1:10,each = 2))]))
-gdppc_cov = as.matrix(bdiag(gdppc[c(rep(1:10,each = 2))]))
-cinc_cov =as.matrix(bdiag(cinc[c(rep(1:10,each = 2))]))
-common_friends_cov = as.matrix(bdiag(common_friends[c(rep(1:10,each = 2))]))
-common_enemies_cov = as.matrix(bdiag(common_enemies[c(rep(1:10,each = 2))]))
-contiguity_cov = as.matrix(bdiag(contiguity[c(rep(1:10,each = 2))]))
 
-formula_tmp = dynamnet ~ 
-  Cross( ~  dyadcov(distance_cov) + 
-           L(~edges  + isolates +  gwdegree(log(2), fix =T) +  
-               dyadcov(polity_cov) +  dyadcov(cinc_cov) + dyadcov(gdp_cov), ~pos) +
-           L(~edges + isolates + gwdegree(log(2), fix =T) +    
-               dyadcov(polity_cov)  + dyadcov(cinc_cov) + dyadcov(gdp_cov), ~neg) + 
-           gwespL(log(2), fix=T, L.base=~pos, Ls.path=c(~pos,~pos)) + 
-           gwespL(log(2), fix=T, L.base=~pos, Ls.path=c(~neg,~neg)) + 
-           gwespL(log(2), fix=T, L.base=~neg, Ls.path=c(~pos,~pos)) + 
-           gwespL(log(2), fix=T, L.base=~neg, Ls.path=c(~neg,~neg)))   +
-  Change( ~L(~edges, ~pos) + L(~edges, ~neg)) 
-
-formula_alt = dynamnet ~ 
-  Cross( ~  dyadcov(distance_cov) + 
-           L(~edges  + isolates +  gwdegree(log(2), fix =T) +  
-               + dyadcov(common_friends_cov) + dyadcov(common_enemies_cov) + dyadcov(polity_cov) +  dyadcov(cinc_cov) + dyadcov(gdp_cov), ~pos) +
-           L(~edges + isolates + gwdegree(log(2), fix =T) +    
-               + dyadcov(common_friends_cov) + dyadcov(common_enemies_cov) + dyadcov(polity_cov)  + dyadcov(cinc_cov) + dyadcov(gdp_cov), ~neg))   +
-  Change( ~L(~edges, ~pos) + L(~edges, ~neg)) 
-gof_tmp = ergm::gof(mod_alt,control = control.gof.ergm(nsim = 1000))
-
-
-# 2, fix=TRUE, L.base=~neg, Ls.path=c(~neg,~neg))) 
-mod_alt = ergm(formula_alt,estimate = "MPLE") 
-
-mod_alt = ergm(formula_alt,control = control.ergm(init =mod_alt$coefficient ,
-                                                  MCMLE.metric = "lognormal",
-                                                  MCMC.effectiveSize = NULL,
-                                                  MCMC.burnin = 1000*10,
-                                                  MCMC.interval = 1000,
-                                                  MCMC.samplesize = 2000,
-                                                  MCMC.prop = ~sparse)) 
-
-mod_new = ergm(formula_tmp,estimate = "MPLE") 
-mod_new = ergm(formula_tmp,control = control.ergm(init =mod_new$coefficient, 
-                                                  MCMLE.metric = "lognormal",
-                                                  MCMC.effectiveSize = NULL,
-                                                  MCMC.burnin = 1000*10,
-                                                  MCMC.interval = 1000,
-                                                  MCMC.samplesize = 2000,
-                                                  MCMC.prop = ~sparse)) 
-
-AIC(mod_new)
-AIC(mod_alt)
-
-debugonce(simulate.ergm_state_full)
-debugonce(gof)
-res = readRDS("res.RDS")
-res$loglikelihood
-trying_mod$loglikelihood
-
-AIC(trying_mod)
-
-gof_tmp = ergm::gof(res,control = control.gof.ergm(nsim = 1000))
-
-simul = simulate(res,nsim = 1000)
-
-simul = simulate(trying_mod,nsim = 1000, control = control.simulate.ergm(MCMC.burnin = 1000*10,))
-cov(simul)
-trying_mod = ergm(formula_tmp) 
-gofN()
 library(parallel)
 no_cores <- 10
 # Setup cluster
