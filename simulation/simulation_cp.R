@@ -3,7 +3,6 @@ library(dplyr)
 library(stringr)
 n_actors = 100
 n_sim = 100
-# gt = c("edges_pos" = -5,"edges_neg" = -3,"gwdegree_pos" = 0.5, "gwdegree_neg" = -0.5,"gwese_pos" = 0.7,"gwesf_pos" = 1)
 gt = c("edges_pos" = -2,"edges_neg" = -4,"gwdegree_pos" = -2, "gwdegree_neg" = -0.3,
        "gwese_pos" = 0.6,"gwesf_pos" = 0.5,"gwese_neg" = 0.5,"gwesf_neg" = 0.3)
 seed = 123
@@ -12,7 +11,6 @@ n_obs = 10
 network = matrix(data = 0,nrow = n_actors, ncol = n_actors)
 tmp_network = replicate(n_obs,network, simplify=FALSE)
 alpha =  replicate(n_obs, matrix(log(2)), simplify=FALSE)
-# formula_tmp = tmp_network ~ edges_pos + edges_neg + gwdegree_pos(data = alpha)+ gwdegree_neg(data = alpha) + gwese_pos(data = alpha)+ gwesf_pos(data = alpha)
 formula_tmp = tmp_network ~ edges_pos + edges_neg + gwdegree_pos(data = alpha)+ gwdegree_neg(data = alpha) + gwese_pos(data = alpha)+ gwesf_pos(data = alpha) +
   gwese_neg(data = alpha) + gwesf_neg(data = alpha)
 
@@ -74,12 +72,7 @@ function_simulate_cp = function(k,networks, n_actors, alpha) {
   cat("Save!\n")
 } 
 
-# debugonce(function_simulate_cp)
-# res = lapply(X = 1:n_sim,FUN = function_simulate_cp,networks = networks,
-#            n_actors = n_actors, alpha = alpha)
-
 parLapply(X = 1:n_sim,cl = clust,fun = function_simulate_cp,n_actors = n_actors,networks = networks, alpha = alpha) 
-# save(res, file = paste0("../sergm_replication/simulation/results/res_cp.RData"))
 stopCluster(clust)
 file.remove("output.txt")
 gc(full = T)
@@ -166,23 +159,3 @@ get_info_simulation = function(result,gt, digits = 3) {
   return(res)
 }
 result_simulation = get_info_simulation(result = result,gt = gt,digits = 3)
-library(Hmisc)
-
-
-latex(result_simulation, label = "tbl:simulation_res",    file = "",
-      colheads = c("Coef.", rep(c("AVE", "RMSE", "CP"),times = 2)),
-      rowname = c("Edges +", "Edges -", "GWD +", "GWD -", "GWESE +", "GWESF +"),
-      cgroup = c("", "ML", "MPL"), n.cgroup = c(1, 3, 3), cgroupTexCmd = " ",
-      rgroupTexCmd = " ",colnamesTexCmd = " ",
-              caption = "Result of the simulation study for the EcREM and REM \n      with the three data-generating processes (DG 1, DG2, DG3). \n      For each DG (data-generating process) and covariate, we note the AVE (average estimate), RMSE (Root-Mean-Squared Error), \n      and CP (Coverage Probability). Further, for each Data Generating process (DG) the Percentage of True Events (PTE) is given.")
-
-# 
-# errors_ml = sweep(coefs_ML,MARGIN = 2,STATS = gt,FUN = "-")
-# errors_mpl = sweep(coefs_MPL,MARGIN = 2,STATS = gt,FUN = "-")
-# apply(errors_mpl^2,MARGIN = 2,FUN = sum)
-# apply(errors_ml^2,MARGIN = 2,FUN = sum)
-# colMeans(coefs_ML)
-# apply(coefs_ML,MARGIN = 2,FUN = var)
-# apply(coefs_MPL,MARGIN = 2,FUN = var)
-# 
-# colMeans(coefs_MPL)
