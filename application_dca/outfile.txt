@@ -1,0 +1,1000 @@
+starting worker pid=403187 on localhost:11685 at 15:16:25.589
+starting worker pid=403201 on localhost:11685 at 15:16:25.714
+starting worker pid=403215 on localhost:11685 at 15:16:25.842
+starting worker pid=403230 on localhost:11685 at 15:16:25.969
+starting worker pid=403244 on localhost:11685 at 15:16:26.097
+starting worker pid=403259 on localhost:11685 at 15:16:26.222
+starting worker pid=403274 on localhost:11685 at 15:16:26.386
+starting worker pid=403288 on localhost:11685 at 15:16:26.512
+starting worker pid=403303 on localhost:11685 at 15:16:26.640
+starting worker pid=403319 on localhost:11685 at 15:16:26.767
+Start SingleBridge 1 
+Start sampling 1 
+Start SingleBridge 1 
+Start sampling 1 
+Start SingleBridge 1 
+Start sampling 1 
+Start SingleBridge 1 
+Start sampling 1 
+Start SingleBridge 1 
+Start sampling 1 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Start SingleBridge 1 
+Start sampling 1 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 16 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 16 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 16 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 16 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 16 
+Done sampling 16 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 16 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 16 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 16 
+Done sampling 16 
+Start SingleBridge 1 
+Start sampling 1 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 2 
+Done sampling 3 
+Bridge 3 
+Start sampling 3 
+Bridge 4 
+Start sampling 4 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Start SingleBridge 1 
+Start sampling 1 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 1 
+Bridge 2 
+Start sampling 2 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 2 
+Done sampling 4 
+Bridge 3 
+Start sampling 3 
+Bridge 5 
+Start sampling 5 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 2 
+Bridge 3 
+Start sampling 3 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 3 
+Bridge 4 
+Start sampling 4 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 4 
+Bridge 5 
+Start sampling 5 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 5 
+Bridge 6 
+Start sampling 6 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 6 
+Bridge 7 
+Start sampling 7 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 7 
+Bridge 8 
+Start sampling 8 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 16 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 8 
+Bridge 9 
+Start sampling 9 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 15 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Bridge 16 
+Start sampling 16 
+Done sampling 16 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 9 
+Bridge 10 
+Start sampling 10 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 16 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 10 
+Bridge 11 
+Start sampling 11 
+Done sampling 16 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 14 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Bridge 15 
+Start sampling 15 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 16 
+Done sampling 11 
+Bridge 12 
+Start sampling 12 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 15 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Bridge 16 
+Start sampling 16 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 12 
+Bridge 13 
+Start sampling 13 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 16 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 13 
+Bridge 14 
+Start sampling 14 
+Done sampling 16 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 14 
+Bridge 15 
+Start sampling 15 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 16 
+Done sampling 15 
+Bridge 16 
+Start sampling 16 
+Done sampling 16 
+Done sampling 16 
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted

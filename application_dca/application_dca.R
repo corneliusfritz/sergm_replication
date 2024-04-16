@@ -11,6 +11,7 @@ library(ggmcmc)
 library(ergm.sign)
 library(gridExtra)
 library(grid)
+library(Hmisc)
 
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 rm(list=ls())
@@ -20,14 +21,13 @@ library(peacesciencer)
 download_extdata()
 
 tmp_years = 2000:2010
-
+# For full reproducibility, tmp_data is also saved if the "peacesciencer" package will one day seize to exist
 tmp_data = create_dataset_dca(years = tmp_years,
                               only_biggest_cluster =T,
                               aggregate_years =5,mid_var = "any_mid",
                               alliance_var = "any_cow",dca_data = dca_data)
 
 aggre_data = tmp_data
-
 tmp_network = aggre_data$target_matrix
 alpha = matrix(log(2),nrow = 1,ncol = 1)
 alpha = lapply(seq_len(length(tmp_network)), function(X) alpha)
@@ -49,7 +49,7 @@ library(parallel)
 no_cores <- 10
 # Setup cluster
 file.remove("outfile.txt")
-clust <- makeForkCluster(no_cores, outfile= "outfile.txt")
+clust <- makeCluster(no_cores, outfile= "outfile.txt")
 clusterCall(clust, function() {library(ergm.sign);library(Rcpp);library(RcppArmadillo)})
 
 model_1 = tsergm(formula = tmp_network ~ edges_pos+ 
@@ -92,8 +92,6 @@ model_1 = tsergm(formula = tmp_network ~ edges_pos+
                                                                     n_proposals_burn_in = 1000*10,
                                                                     n_proposals = 1000,mh = F,seed = 13),
                                         Stepping_number_grids = 1000))
-
-summary(model_1)
 save(model_1, file = "models/model_1.Rds")
 
 model_1_assessment = t_model_assessment(model_1,cluster = clust,sampler.sergm(number_networks = 3000,
@@ -103,8 +101,6 @@ model_1_assessment = t_model_assessment(model_1,cluster = clust,sampler.sergm(nu
 
 save(model_1_assessment, file = "models/model_dependence_assessment.Rds")
 
-load("models/model_dependence_assessment.Rds")
-
 plots_1 = t_plot_model_assessment(mod_ass = model_1_assessment)
 
 # Small function to have particular major and minor labels in a graph generated with ggplot2
@@ -113,44 +109,18 @@ minor_label = function(from = 0, to = 75, label = c(0,seq(10,70,10))) {
   res[label+1] = label
   return(res)
 }
+# Plots used in SM 3.2.1 (Figure 6), SM 3.2.2 (Figures 7-15) and plot from 2010 used in Figure 3 of the main paper
 for(i in 1:10){
   cat(i,"\n")
   tmp_plot = plots_1[i,3][[1]]
   plots_1[i,3][[1]] = tmp_plot + scale_x_discrete(breaks = 0:75,label = minor_label(0,75,c(0,seq(10,70,10))))
   tmp_plot = plots_1[i,2][[1]]
   plots_1[i,2][[1]] = tmp_plot + scale_x_discrete(breaks = 0:75,label = minor_label(0,75,c(0,seq(5,35,5))))
-  ggsave(plot = plots_1[i,3][[1]]+ ggtitle(paste("Year", i+1999)) + theme(plot.title = element_text(hjust = 0.5)),filename = paste("plots/positive_degree_gof_scale_",i,".png"),width = 6,height = 3.5)
-  ggsave(plot = plots_1[i,1][[1]]+ ggtitle(paste("Year", i+1999)) + theme(plot.title = element_text(hjust = 0.5)),filename = paste("plots/ese_gof_scale_",i,".png"),width = 3.5,height = 3.5)
-  ggsave(plot = plots_1[i,4][[1]]+ ggtitle(paste("Year", i+1999)) + theme(plot.title = element_text(hjust = 0.5)),filename = paste("plots/negative_degree_gof_scale_",i,".png"),width = 3.5,height = 3.5)
-  ggsave(plot = plots_1[i,2][[1]]+ ggtitle(paste("Year", i+1999)) + theme(plot.title = element_text(hjust = 0.5)),filename = paste("plots/esf_gof_scale_",i,".png"),width = 6,height = 3.5)
+  ggsave(plot = plots_1[i,3][[1]]+  theme(plot.title = element_text(hjust = 0.5)),filename = paste0("plots/positive_degree_gof_scale_",i,".png"),width = 6,height = 3.5)
+  ggsave(plot = plots_1[i,1][[1]]+ theme(plot.title = element_text(hjust = 0.5)),filename = paste0("plots/ese_gof_scale_",i,".png"),width = 3.5,height = 3.5)
+  ggsave(plot = plots_1[i,4][[1]]+  theme(plot.title = element_text(hjust = 0.5)),filename = paste0("plots/negative_degree_gof_scale_",i,".png"),width = 3.5,height = 3.5)
+  ggsave(plot = plots_1[i,2][[1]]+ ggtitle(paste("Year", i+2000)) + theme(plot.title = element_text(hjust = 0.5)),filename = paste0("plots/esf_gof_scale_",i,".png"),width = 6,height = 3.5)
 }
-
-
-model_2 = tsergm(formula = tmp_network ~ edges_pos+ 
-                   cov_dyad_pos(data = polity) +
-                   cov_dyad_neg(data = polity) +
-                   cov_dyad_pos(data = cinc) +
-                   cov_dyad_neg(data = cinc) +
-                   cov_dyad(data = distance) +
-                   cov_dyad_pos(data = gdp) +
-                   cov_dyad_neg(data = gdp) +
-                   edges_neg,
-                 control.sergm(method_est = c("MPLE"),tol = 0.2,
-                               method_var = c("MPLE"),max_it = 30,
-                               eval_likelihood = T, cluster = clust,
-                               sampler_var = sampler.sergm(number_networks = 3000,
-                                                           init_empty = T,
-                                                           n_proposals_burn_in = 100000,
-                                                           n_proposals = 10000,mh = F,seed = 13),
-                               sampler_path_sampling  = sampler.sergm(number_networks = 3000,
-                                                                      init_empty = T,
-                                                                      n_proposals_burn_in = 100000,
-                                                                      n_proposals = 1000,mh = F,seed = 13),
-                               sampler_est = sampler.sergm(number_networks = 2000,
-                                                           init_empty = F,
-                                                           n_proposals_burn_in = 1000*10,
-                                                           n_proposals = 1000,mh = F,seed = 13),
-                               Stepping_number_grids = 1000))
 
 
 
@@ -191,36 +161,39 @@ model_2 = tsergm(formula = tmp_network ~ edges_pos+
                                Stepping_number_grids = 1000))
 
 save(model_2, file = "models/model_2.Rds")
-
 model_2_assessment = t_model_assessment(model_2,cluster = clust,sampler.sergm(number_networks = 3000,
                                                                               init_empty = T,
                                                                               n_proposals_burn_in = 10000,
                                                                               n_proposals = 1000,mh = F,seed = 13))
-
+save(model_2_assessment, file = "models/model_2_assessment.Rds")
 plots_2 = t_plot_model_assessment(mod_ass = model_2_assessment)
+# Plots used in SM 3.2.1 Figure 6
 for(i in 1:10){
   tmp_plot = plots_2[i,3][[1]]
   plots_2[i,3][[1]] = tmp_plot + scale_x_discrete(breaks = 0:75,label = minor_label(0,75,c(0,seq(10,70,10))))
   tmp_plot = plots_2[i,2][[1]]
   plots_2[i,2][[1]] = tmp_plot + scale_x_discrete(breaks = 0:75,label = minor_label(0,75,c(0,seq(5,35,5))))
   ggsave(plot = plots_2[i,3][[1]]+ 
-           ggtitle(paste("Year", i+1999)) + 
-           theme(plot.title = element_text(hjust = 0.5)),filename = paste("plots/alt_positive_degree_gof_scale_",i,".png"),width = 6,height = 3.5)
+           theme(plot.title = element_text(hjust = 0.5)),filename = paste0("plots/alt_positive_degree_gof_scale_",i,".png"),width = 6,height = 3.5)
   ggsave(plot = plots_2[i,1][[1]]+ 
-           ggtitle(paste("Year", i+1999)) + 
-           theme(plot.title = element_text(hjust = 0.5)),filename = paste("plots/alt_ese_gof_scale_",i,".png"),width = 3.5,height = 3.5)
+           theme(plot.title = element_text(hjust = 0.5)),filename = paste0("plots/alt_ese_gof_scale_",i,".png"),width = 3.5,height = 3.5)
   ggsave(plot = plots_2[i,4][[1]]+ 
-           ggtitle(paste("Year", i+1999)) + 
-           theme(plot.title = element_text(hjust = 0.5)),filename = paste("plots/alt_negative_degree_gof_scale_",i,".png"),width = 3.5,height = 3.5)
+           theme(plot.title = element_text(hjust = 0.5)),filename = paste0("plots/alt_negative_degree_gof_scale_",i,".png"),width = 3.5,height = 3.5)
   ggsave(plot = plots_2[i,2][[1]]+ 
-           ggtitle(paste("Year", i+1999)) +
-           theme(plot.title = element_text(hjust = 0.5)),filename = paste("plots/alt_esf_gof_scale_",i,".png"),width = 6,height = 3.5)
+           theme(plot.title = element_text(hjust = 0.5)),filename = paste0("plots/alt_esf_gof_scale_",i,".png"),width = 6,height = 3.5)
 }
 
-plots_2[,3]
 res = t_generate_table(digits = 3, model_1, model_2)
+res[24,][4] = round(as.numeric(res[24,][4]) - as.numeric(res[24,][2]), digits = 3)
+res[24,][2] = ""
+# Table 1 from the paper 
+latex(object = res,label = "tbl:res_cow",first.hline.double= F,rowlabel.just = "l",
+      cgroupTexCmd = " ",rgroupTexCmd = " ",
+      caption = "Estimated coefficients and confidence intervals of the two model specifications detailed above. Dashes indicate the exclusion of covariates in a model specification. 
+      $\\Delta$AIC indicates the difference between the AIC values of Model 1 and the other model.")
 
-# MCMC Plots ----
+
+# MCMC Plots in SM 3.3 (Figures 16-20) ----
 colnames(model_1$mcmc_chain) = c("Edges +", "Edges -", "Isolates +", 
                                  "Isolates -", "Stability +", "Stability -", 
                                  "Abs. Polity Diff. +", "Abs. Polity Diff. -",
@@ -258,3 +231,4 @@ ggsave(res_2,filename = "plots/dca_mcmc_diag_2.pdf",width = 7,height = 6.66)
 ggsave(res_3,filename = "plots/dca_mcmc_diag_3.pdf",width = 7,height = 6.66)
 ggsave(res_4,filename = "plots/dca_mcmc_diag_4.pdf",width = 7,height = 6.66*0.75)
 ggsave(res_5,filename = "plots/dca_mcmc_diag_5.pdf",width = 7,height = 6.66)
+

@@ -1,3 +1,14 @@
+map_to_mat = function(edges_pos, edges_neg,n_actors){
+  # Generate empty network
+  network_tmp = matrix(0,nrow = n_actors,ncol = n_actors)
+  for(i in 1:n_actors){
+    network_tmp[as.numeric(names(edges_pos)[i]),edges_pos[[i]]] = 1
+    network_tmp[as.numeric(names(edges_neg)[i]),edges_neg[[i]]] = -1
+  }
+  # class(network_tmp) = "snetwork"
+  return(network_tmp)
+}
+
 
 NVL = function (...) {
   for (e in eval(substitute(alist(...)))) {
@@ -400,7 +411,7 @@ t_generate_table = function(digits = 3, ...){
     res[1:length(coef_names),1] = x$coefficients_new
     res[1:length(coef_names),2] =    x$ci
     # res[uneven_rows,2] =    x$z_new
-    res[length(coef_names) +1,1] = round(AIC(x), digits = digits)
+    res[length(coef_names) +1,1] = round(AIC(x,k = 2), digits = digits)
     return(res)
   }, coef_names = coef_names)
 
@@ -431,8 +442,8 @@ t_plot_model_assessment = function(mod_ass){
       geom_boxplot(aes(x = (variable), y = (value))) +
       geom_line(data = line_data, aes(x = x, y = y), color = "red") + 
       theme_pubr() + 
-      xlab("Edgewise-Shared Enemies") +
-      ylab("Number of observations") +
+      xlab("k") +
+      ylab(expression(paste(ESE[k]^{"-"}))) +
       scale_y_continuous(trans='log1p', breaks = c(0,2,10,50,250, 1000))
     # 2. Edgewise-shared Partners plots 
     setDT(mod_ass$df_esp_list[[i]])
@@ -446,8 +457,8 @@ t_plot_model_assessment = function(mod_ass){
       geom_boxplot(aes(x = (variable), y = value)) +
       geom_line(data = line_data, aes(x = x, y = y), color = "red") + 
       theme_pubr() + 
-      xlab("Edgewise-Shared Friends") +
-      ylab("Number of observations") +
+      xlab("k") +
+      ylab(expression(paste(ESF[k]^{"+"}))) +
       scale_y_continuous(trans='log1p', breaks = c(0,2,10,50,250, 600))
     
     # 3. Positive degree distribution
@@ -462,9 +473,9 @@ t_plot_model_assessment = function(mod_ass){
       geom_boxplot(aes(x = (variable), y = value)) +
       geom_line(data = line_data, aes(x = x, y = y), color = "red") + 
       theme_pubr() + 
-      xlab("Positive Degree") +
-      ylab("Number of observations")
-    
+      xlab("k") +
+      ylab(expression(paste(DEG[k]^{"+"})))
+      
     # 4. Negative degree distribution
     setDT(mod_ass$df_dn_list[[i]])
     plot_data = melt.data.table(mod_ass$df_dn_list[[i]])
@@ -477,8 +488,8 @@ t_plot_model_assessment = function(mod_ass){
       geom_boxplot(aes(x = (variable), y = value)) +
       geom_line(data = line_data, aes(x = x, y = y), color = "red") + 
       theme_pubr() + 
-      xlab("Negative Degree") +
-      ylab("Number of observations")+
+      xlab("k") +
+      ylab(expression(paste(DEG[k]^{"-"}))) + 
       scale_y_continuous(trans='log1p', breaks = c(0,2,10,50,150))
     
     
@@ -516,8 +527,8 @@ plot_model_assessment = function(mod_ass){
     geom_boxplot(aes(x = (variable), y = value)) +
     geom_line(data = line_data, aes(x = x, y = y), color = "red") + 
     theme_pubr() + 
-    xlab("Edgewise-Shared Enemies") +
-    ylab("Number of observations")
+    xlab("k") +
+    ylab(expression(paste(ESE[k]^{"-"})))
   # 2. Edgewise-shared Partners plots 
   setDT(mod_ass$df_esp)
   plot_data = melt.data.table(mod_ass$df_esp)
@@ -532,8 +543,8 @@ plot_model_assessment = function(mod_ass){
     geom_boxplot(aes(x = (variable), y = value)) +
     geom_line(data = line_data, aes(x = x, y = y), color = "red") + 
     theme_pubr() + 
-    xlab("Edgewise-Shared Friends") +
-    ylab("Number of observations")
+    xlab("k") +
+    ylab(expression(paste(ESF[k]^{"+"})))
   # 3. Positive degree distribution
   setDT(mod_ass$df_dp)
   plot_data = melt.data.table(mod_ass$df_dp)
@@ -548,8 +559,8 @@ plot_model_assessment = function(mod_ass){
     geom_boxplot(aes(x = (variable), y = value)) +
     geom_line(data = line_data, aes(x = x, y = y), color = "red") + 
     theme_pubr() + 
-    xlab("Positive Degree") +
-    ylab("Number of observations")
+    xlab("k") +
+    ylab(expression(paste(DEG[k]^{"+"})))
   # 4. Negative degree distribution
   setDT(mod_ass$df_dn)
   plot_data = melt.data.table(mod_ass$df_dn)
@@ -564,8 +575,8 @@ plot_model_assessment = function(mod_ass){
     geom_boxplot(aes(x = (variable), y = value)) +
     geom_line(data = line_data, aes(x = x, y = y), color = "red") + 
     theme_pubr() + 
-    xlab("Negative Degree") +
-    ylab("Number of observations")
+    xlab("k") +
+    ylab(expression(paste(DEG[k]^{"-"})))
   
   plot_data = melt.data.table(as.data.table(mod_ass$df_igraph[,-1]))
   line_data = data.table(x = 1:length(mod_ass$igraph_data_obs[-1]), y = as.numeric(mod_ass$igraph_data_obs[-1]))
