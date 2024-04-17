@@ -1,26 +1,18 @@
 library(ergm.sign)
 library(dplyr)
 library(stringr)
-
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-
 n_actors = 100
 n_sim = 100
-# gt = c("edges_pos" = -2,"edges_neg" = -4,"gwdegree_pos" = -2, "gwdegree_neg" = -0.3,
-#        "gwese_pos" = 0.6,"gwesf_pos" = 0.5,"gwese_neg" = 0.5,"gwesf_neg" = 0.3)
-gt = c(-5,-3, 0.5, -0.5, 0.5)
-source("../other_functions.R")
-
+gt = c("edges_pos" = -2,"edges_neg" = -4,"gwdegree_pos" = -2, "gwdegree_neg" = -0.3,
+       "gwese_pos" = 0.6,"gwesf_pos" = 0.5,"gwese_neg" = 0.5,"gwesf_neg" = 0.3)
 seed = 123
 n_obs = 10
 
 network = matrix(data = 0,nrow = n_actors, ncol = n_actors)
 tmp_network = replicate(n_obs,network, simplify=FALSE)
 alpha =  replicate(n_obs, matrix(log(2)), simplify=FALSE)
-formula_tmp  <- tmp_network ~ edges_pos + edges_neg + gwdegree_pos(data = alpha)+ gwdegree_neg(data = alpha) + gwese_pos(data = alpha)
-
-# formula_tmp = tmp_network ~ edges_pos + edges_neg + gwdegree_pos(data = alpha)+ gwdegree_neg(data = alpha) + gwese_pos(data = alpha)+ gwesf_pos(data = alpha) +
-  # gwese_neg(data = alpha) + gwesf_neg(data = alpha)
+formula_tmp = tmp_network ~ edges_pos + edges_neg + gwdegree_pos(data = alpha)+ gwdegree_neg(data = alpha) + gwese_pos(data = alpha)+ gwesf_pos(data = alpha) +
+  gwese_neg(data = alpha) + gwesf_neg(data = alpha)
 
 simulated_nets = tsergm_simulate(formula_tmp, 
                                  coef = gt, 
@@ -29,6 +21,10 @@ simulated_nets = tsergm_simulate(formula_tmp,
                                                          seed = seed,mh = F,
                                                          n_proposals_burn_in = 2000000,
                                                          n_proposals = 20000))
+
+plot(simulated_nets[[1]]$stats[,8])
+
+acf(simulated_nets[[1]]$stats[,6])
 
 networks = list()
 for(k in 1:n_sim){
@@ -41,20 +37,18 @@ for(k in 1:n_sim){
 }
 
 library(parallel)
-# Set this lower if you have less computational power!
-no_cores <- 50
+no_cores <- 20
 # Setup cluster
-clust <- makeCluster(no_cores, outfile = "output.txt")
-
-clusterCall(clust, function() {source("../other_functions.R");library(ergm.sign);library(Rcpp);library(RcppArmadillo)})
+clust <- makeForkCluster(no_cores, outfile = "output.txt")
+clusterCall(clust, function() {library(ergm.sign);library(Rcpp);library(RcppArmadillo)})
 
 function_simulate_cp = function(k,networks, n_actors, alpha) {
   res = list()
   now = Sys.time()
   simulated_network = networks[[k]]
-  
-  model_stepping =  tsergm(formula = simulated_network ~ edges_pos + edges_neg + gwdegree_pos(data = alpha)+ gwdegree_neg(data = alpha) + gwese_pos(data = alpha),
-                           control = control.sergm(method_est = "Stepping",eval_likelihood = F,tol =0.01, method_var = "Fisher",
+  model_stepping =  tsergm(formula = simulated_network ~ edges_pos + edges_neg + gwdegree_pos(data = alpha)+
+                             gwdegree_neg(data = alpha) + gwese_pos(data = alpha)+ gwesf_pos(data = alpha),
+                           control = control.sergm(method_est = "Stepping",eval_likelihood = F,tol =0.001, method_var = "Fisher",
                                                    sampler_est = sampler.sergm(number_networks = 250,init_empty = T,seed = 122),
                                                    sampler_var = sampler.sergm(number_networks = 500,init_empty = T,seed = 123)))
   time_taken  = as.numeric(difftime(Sys.time() , now), units="hours")
@@ -64,7 +58,8 @@ function_simulate_cp = function(k,networks, n_actors, alpha) {
   rm(model_stepping)
   gc(full = T)
   now = Sys.time()
-  mdel_mple =  tsergm(formula = simulated_network ~ edges_pos + edges_neg + gwdegree_pos(data = alpha)+ gwdegree_neg(data = alpha) + gwese_pos(data = alpha),
+  mdel_mple =  tsergm(formula = simulated_network ~ edges_pos + edges_neg + gwdegree_pos(data = alpha)+
+                        gwdegree_neg(data = alpha) + gwese_pos(data = alpha)+ gwesf_pos(data = alpha),
                       control = control.sergm(method_est = "MPLE",eval_likelihood = F,method_var = "MPLE"))
   time_taken  = as.numeric(difftime(Sys.time() , now), units="hours")
   # res_mple = list(model = mdel_mple, model_coef = mdel_mple$coefficients,model_var = mdel_mple$var, time = time_taken)
@@ -72,11 +67,10 @@ function_simulate_cp = function(k,networks, n_actors, alpha) {
   rm(mdel_mple)
   
   gc(full = T)
-  save(res_stepping, file = paste0("results/simulation_2_res_stepping_",k,".RData"))
-  save(res_mple, file = paste0("results/simulation_2_res_mple_",k,".RData"))
+  save(res_stepping, file = paste0("simulation/results/simulation_2_res_stepping_",k,".RData"))
+  save(res_mple, file = paste0("simulation/results/simulation_2_res_mple_",k,".RData"))
   cat("Save!\n")
 } 
-# function_simulate_cp(k = 1,n_actors = n_actors,networks = networks, alpha = alpha)
 
 parLapply(X = 1:n_sim,cl = clust,fun = function_simulate_cp,n_actors = n_actors,networks = networks, alpha = alpha) 
 stopCluster(clust)
@@ -86,8 +80,8 @@ gc(full = T)
 res = list()
 
 for(i in 1:n_sim){
-  load(file = paste0("results/simulation_2_res_stepping_",i,".RData"))
-  load(file = paste0("results/simulation_2_res_mple_",i,".RData"))
+  load(file = paste0("simulation/results/simulation_2_res_stepping_",i,".RData"))
+  load(file = paste0("simulation/results/simulation_2_res_mple_",i,".RData"))
   res[[i]] = list()
   res[[i]]$mle = res_stepping
   res[[i]]$mple = res_mple
@@ -98,6 +92,7 @@ coefs_ML = list()
 coefs_MPL = list()
 is_within_ML = list()
 is_within_MPL = list()
+
 for(i in 1:length(res)){
   tmp_mle_model = res[[i]]$mle
   tmp_mple_model = res[[i]]$mple
@@ -108,7 +103,7 @@ for(i in 1:length(res)){
            tmp_mle_model$model_coef + sqrt(diag(tmp_mle_model$model_var))*qnorm(p = 1-0.025)),ncol = 2)
   res_tmp = c()
   for(j in 1:length(tmp_mle_model$model_coef)){
-    res_tmp[j] =  between(gt[j],left = confint_tmp[j,1], right = confint_tmp[j,2])
+    res_tmp[j] =  between(  gt[j],left = confint_tmp[j,1], right = confint_tmp[j,2])
   }
   is_within_ML[[i]] = res_tmp
   #
@@ -130,7 +125,6 @@ errors_MPL = do.call(rbind,errors_MPL)
 errors_ML = do.call(rbind,errors_ML)
 cp_ML = do.call(rbind,is_within_ML)
 cp_MPL = do.call(rbind,is_within_MPL)
-
 colMeans(cp_ML)
 colMeans(cp_MPL)
 colMeans(sqrt(errors_ML))
